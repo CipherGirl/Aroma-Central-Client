@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ActionIcon, Container, useMantineColorScheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const useOutsideClicker = (ref) => {
     useEffect(() => {
@@ -20,6 +22,10 @@ const Navbar = () => {
       };
     }, [ref]);
   };
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
 
   const wrapperRef = useRef(null);
   useOutsideClicker(wrapperRef);
