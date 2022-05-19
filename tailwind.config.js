@@ -4,12 +4,12 @@ module.exports = {
     extend: {
       // that is animation class
       animation: {
-        fade: 'fadeOut .3s ease',
+        fadeIn: 'fadeIn .3s ease',
       },
 
       // that is actual animation
       keyframes: (theme) => ({
-        fadeOut: {
+        fadeIn: {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 },
         },

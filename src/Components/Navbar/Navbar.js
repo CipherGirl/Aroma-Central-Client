@@ -198,7 +198,7 @@ const MobileMenu = ({ isOpen }) => {
       className={`${dark ? 'bg-[#1a1b1e]' : 'bg-white'}
         ${
           isOpen
-            ? 'container absolute  md:hidden animate-fade px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center justify-center'
+            ? 'container absolute z-[100] md:hidden animate-fadeIn px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center justify-center'
             : 'hidden'
         }
       `}

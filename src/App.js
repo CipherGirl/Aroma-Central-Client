@@ -24,6 +24,7 @@ function App() {
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider
+        emotionOptions={{ key: 'mantine' }}
         theme={{ colorScheme }}
         withGlobalStyles
         withNormalizeCSS
