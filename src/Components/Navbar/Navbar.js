@@ -11,7 +11,7 @@ const Navbar = () => {
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
-          setIsOpen(!isOpen);
+          setIsOpen(false);
         }
       };
       document.addEventListener('mousedown', handleClickOutside);
@@ -159,7 +159,7 @@ const Navbar = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d="M4 6h16M4 12h16M4 18h16"
+                      d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
                 ) : (
@@ -175,7 +175,7 @@ const Navbar = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth="2"
-                      d="M6 18L18 6M6 6l12 12"
+                      d="M4 6h16M4 12h16M4 18h16"
                     />
                   </svg>
                 )}
@@ -198,8 +198,8 @@ const MobileMenu = ({ isOpen }) => {
       className={`${dark ? 'bg-[#1a1b1e]' : 'bg-white'}
         ${
           isOpen
-            ? 'hidden'
-            : 'container absolute  md:hidden animate-fade px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center justify-center'
+            ? 'container absolute  md:hidden animate-fade px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center justify-center'
+            : 'hidden'
         }
       `}
     >
