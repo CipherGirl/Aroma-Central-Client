@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ActionIcon, Container, useMantineColorScheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import Contact from '../Contact/Contact';
-import Signup from '../Auth/Signup/Signup';
 
 const Navbar = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();

@@ -2,17 +2,17 @@ import { useState } from 'react';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Home from './Components/Home/Home';
 import Navbar from './Components/Navbar/Navbar';
-import ViewItem from './Components/ViewItem/ViewItem';
-import Blog from './Components/Blog/Blog';
-import About from './Components/Home/About/About';
+import RequireAuth from './Components/Auth/RequireAuth/RequireAuth';
+import Footer from './Components/Footer/Footer';
 import Login from './Components/Auth/Login/Login';
 import Signup from './Components/Auth/Signup/Signup';
-import RequireAuth from './Components/Auth/RequireAuth/RequireAuth';
-import ManageItems from './Components/ManageItems/ManageItems';
-import UserItems from './Components/UserItems/UserItems';
-import Footer from './Components/Footer/Footer';
+import Home from './Pages/Home/Home';
+import Blog from './Pages/Blog/Blog';
+import About from './Pages/Home/About/About';
+import ViewItem from './Pages/ViewItem/ViewItem';
+import ManageItems from './Pages/ManageItems/ManageItems';
+import UserItems from './Pages/UserItems/UserItems';
 
 function App() {
   const [colorScheme, setColorScheme] = useState('light');
