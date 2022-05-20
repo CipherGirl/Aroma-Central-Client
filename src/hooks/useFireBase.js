@@ -12,11 +12,14 @@ import {
 import { showNotification, updateNotification } from '@mantine/notifications';
 import { useEffect, useState } from 'react';
 import { auth } from '../firebase.init';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const useFirebase = () => {
   const [user, setUser] = useState({});
   const googleProvider = new GoogleAuthProvider();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {}, []);
 
@@ -25,8 +28,6 @@ const useFirebase = () => {
       setUser(user || {});
     });
   }, []);
-
-  const navigate = useNavigate();
 
   const signUpWithEmailAndPassword = async (email, password) => {
     showNotification({
@@ -48,7 +49,7 @@ const useFirebase = () => {
             message: 'Welcome, you are now member of Aroma Central!',
             autoClose: 4000,
           });
-          navigate('/');
+          navigate(from, { replace: true });
         })
         .catch((error) => {
           if (error.message.includes('already-in-use')) {
@@ -64,8 +65,8 @@ const useFirebase = () => {
       // updateUser(name);
     } catch (error) {
       showNotification({
-        title: `${error.message}`,
-        message: 'Hey there, your code is awesome! 🤥',
+        title: 'Cannot send verification mail',
+        message: error.message,
       });
     }
   };
@@ -75,7 +76,7 @@ const useFirebase = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
-        navigate('/');
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -101,7 +102,7 @@ const useFirebase = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         setUser(result.user);
-        navigate('/');
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error.message);
