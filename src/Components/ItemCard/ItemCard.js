@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import {
-  Card,
-  Image,
-  Text,
   Badge,
   Button,
+  Card,
   Group,
+  NumberInput,
+  Text,
   useMantineTheme,
-  Transition,
 } from '@mantine/core';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const ItemCard = (props) => {
   const {
@@ -16,10 +16,10 @@ export const ItemCard = (props) => {
     name,
     image,
     description,
-    suppilerName,
+    supplierName,
     price,
     quantity,
-    withControl,
+    noButton,
   } = props;
   const theme = useMantineTheme();
 
@@ -29,7 +29,9 @@ export const ItemCard = (props) => {
   const navigate = useNavigate();
 
   return (
-    <div className="w-80 m-auto md:w-[380px]">
+    <div
+      className={`w-80 mx-auto  ${noButton ? 'md:w-[900px]' : 'md:w-[390px]'}`}
+    >
       <Card shadow="sm" p="lg">
         <Card.Section>
           <img
@@ -49,31 +51,54 @@ export const ItemCard = (props) => {
           position="apart"
           style={{ marginBottom: 5, marginTop: theme.spacing.sm }}
         >
-          <Text weight={500} size="lg">
+          <Text weight={500} size={`${noButton ? 'xl' : 'lg'}`}>
             {name}
           </Text>
-          <Badge color="blue" variant="light" size="lg">
+          <Badge
+            color="blue"
+            variant="light"
+            size={`${noButton ? 'xl' : 'lg'}`}
+          >
             {'$ '}
             {price}
           </Badge>
         </Group>
 
-        <Text
-          size="sm"
-          style={{ color: secondaryColor, lineHeight: 1.5, height: 120 }}
+        <p
+          className="overflow-hidden h-36"
+          size={`${noButton ? 'lg' : 'xs'}`}
+          style={{
+            color: secondaryColor,
+            lineHeight: 1.5,
+          }}
         >
           {description}
-        </Text>
+        </p>
 
-        <Button
-          variant="outline"
-          fullWidth
-          style={{ marginTop: 14 }}
-          onClick={() => navigate(`/view/${_id}`)}
-        >
-          Update Item
-        </Button>
-        {withControl && <h1>This is controller</h1>}
+        <h4>
+          Supplier: <span className="italic font-semibold">{supplierName}</span>
+        </h4>
+        <h5>
+          Quantity:{' '}
+          <span
+            className={`italic font-semibold ${
+              !quantity ? 'text-red-400' : ''
+            }`}
+          >
+            {quantity ? quantity : 'Sold Out'}
+          </span>
+        </h5>
+
+        {!noButton && (
+          <Button
+            variant="outline"
+            fullWidth
+            onClick={() => navigate(`/view/${_id}`)}
+            className="mt-5"
+          >
+            Update Item
+          </Button>
+        )}
       </Card>
     </div>
   );

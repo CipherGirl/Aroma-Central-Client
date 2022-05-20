@@ -1,8 +1,7 @@
-import React from 'react';
-import useItems from '../../../hooks/useItems';
-import { ItemCard } from '../../../Components/ItemCard/ItemCard';
-import { Grid, Text, Button } from '@mantine/core';
+import { Button, Grid } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
+import { ItemCard } from '../../../Components/ItemCard/ItemCard';
+import useItems from '../../../hooks/useItems';
 
 const Items = () => {
   const [items] = useItems();
