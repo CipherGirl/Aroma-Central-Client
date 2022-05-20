@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
@@ -29,43 +30,45 @@ function App() {
         withGlobalStyles
         withNormalizeCSS
       >
-        <div className="App">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route
-              path="view/:itemId"
-              element={
-                <RequireAuth>
-                  <ViewItem />
-                </RequireAuth>
-              }
-            ></Route>
-            <Route
-              path="manage"
-              element={
-                <RequireAuth>
-                  <ManageItems />
-                </RequireAuth>
-              }
-            ></Route>
-            <Route
-              path="user/items"
-              element={
-                <RequireAuth>
-                  <UserItems />
-                </RequireAuth>
-              }
-            ></Route>
-          </Routes>
-          {/* <div style={{ flexGrow: '1' }}></div> (Use a blank div with flex-grow:1 to fill unused spaced right before the footer) */}
-          {/* <!-- Any content below this will always be at bottom. --> */}
-          <Footer />
-        </div>
+        <NotificationsProvider>
+          <div className="App">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route
+                path="view/:itemId"
+                element={
+                  <RequireAuth>
+                    <ViewItem />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="manage"
+                element={
+                  <RequireAuth>
+                    <ManageItems />
+                  </RequireAuth>
+                }
+              ></Route>
+              <Route
+                path="user/items"
+                element={
+                  <RequireAuth>
+                    <UserItems />
+                  </RequireAuth>
+                }
+              ></Route>
+            </Routes>
+            {/* <div style={{ flexGrow: '1' }}></div> (Use a blank div with flex-grow:1 to fill unused spaced right before the footer) */}
+            {/* <!-- Any content below this will always be at bottom. --> */}
+            <Footer />
+          </div>
+        </NotificationsProvider>
       </MantineProvider>
     </ColorSchemeProvider>
   );

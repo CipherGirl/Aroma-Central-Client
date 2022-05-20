@@ -11,8 +11,11 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useNavigate } from 'react-router-dom';
+import { showNotification, updateNotification } from '@mantine/notifications';
+import useFirebase from '../../../hooks/useFireBase';
 
 const Signup = () => {
+  const { signUpWithEmailAndPassword, signInUsingGoogle } = useFirebase();
   const form = useForm({
     initialValues: {
       email: '',
@@ -36,10 +39,11 @@ const Signup = () => {
   const naviagteToLogin = () => {
     navigate('/login');
   };
-  const handleSubmit = (values) => {
-    console.log(values);
-    form.reset();
+  const handleSubmit = async (values) => {
+    const { email, password } = values;
+    await signUpWithEmailAndPassword(email, password);
   };
+
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       {' '}
@@ -125,9 +129,9 @@ const Signup = () => {
         </Highlight>
       </Text>
       <Divider size={2} my="xl" />
-      <Button fullWidth variant="default">
+      <Button fullWidth variant="default" onClick={() => signInUsingGoogle()}>
         <img src="/images/google.svg" className="w-8 mr-10" />
-        <h3 className="ml-2 mr-10">Login With Google</h3>
+        <h3 className="ml-2 mr-10">Signing With Google</h3>
       </Button>
     </Box>
   );

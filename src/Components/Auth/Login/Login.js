@@ -10,9 +10,18 @@ import {
   Highlight,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
+import { showNotification } from '@mantine/notifications';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useFirebase from '../../../hooks/useFireBase';
+import { useInputState } from '@mantine/hooks';
 
 const Login = () => {
+  const { logInWithEmailAndPassword, signInUsingGoogle, resetPassword } =
+    useFirebase();
+
+  const [email, setEmail] = useInputState('');
+
   const form = useForm({
     initialValues: {
       email: '',
@@ -35,10 +44,23 @@ const Login = () => {
     navigate('/signup');
   };
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    form.reset();
+  const handleSubmit = ({ email, password }) => {
+    logInWithEmailAndPassword(email, password);
   };
+
+  const handleResetPassword = () => {
+    const { value } = form.getInputProps('email');
+    /^\S+@\S+$/.test(value)
+      ? resetPassword(value)
+      : showNotification({
+          color: 'red',
+          title: 'Invalid Email',
+          message:
+            'Email you entered is not valid, please enter a valid email!',
+          disallowClose: false,
+        });
+  };
+
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form
@@ -69,7 +91,7 @@ const Login = () => {
             align=""
             component="span"
             onClick={() => {
-              console.log('Clicke');
+              handleResetPassword();
             }}
             highlight="Click here to reset password"
             highlightStyles={(theme) => ({
@@ -117,11 +139,12 @@ const Login = () => {
         </Highlight>
       </Text>
       <Divider size={2} my="xl" />
-      <Button fullWidth variant="default">
+      <Button fullWidth variant="default" onClick={() => signInUsingGoogle()}>
         <img src="/images/google.svg" className="w-8 mr-10" />
         <h3 className="ml-2 mr-10">Login With Google</h3>
       </Button>
     </Box>
   );
 };
+
 export default Login;

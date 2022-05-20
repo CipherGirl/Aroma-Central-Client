@@ -1,9 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ActionIcon, Container, useMantineColorScheme } from '@mantine/core';
+import React, { useState, useRef, useEffect, forwardRef } from 'react';
+import {
+  ActionIcon,
+  Avatar,
+  Button,
+  Container,
+  Divider,
+  Group,
+  Menu,
+  Text,
+  UnstyledButton,
+  useMantineColorScheme,
+} from '@mantine/core';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import useFirebase from '../../hooks/useFireBase';
+import UserMenu from './UserMenu';
 
 const Navbar = () => {
+  const { user, handleSignOut } = useFirebase();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +28,7 @@ const Navbar = () => {
       const handleClickOutside = (event) => {
         if (ref.current && !ref.current.contains(event.target)) {
           setIsOpen(false);
+        } else {
         }
       };
       document.addEventListener('mousedown', handleClickOutside);
@@ -94,9 +109,6 @@ const Navbar = () => {
 
             <div className="hidden md:block  ">
               <div className="flex items-center space-x-4">
-                <Link to="/login" className="hover:font-semibold px-3 py-3">
-                  Login/Signup
-                </Link>
                 <ActionIcon
                   variant=""
                   color={dark ? '' : 'dark'}
@@ -140,6 +152,14 @@ const Navbar = () => {
                     </svg>
                   )}
                 </ActionIcon>
+
+                {user?.email ? (
+                  <UserMenu />
+                ) : (
+                  <Link to="/login" className="hover:font-semibold px-3 py-3">
+                    Login/Signup
+                  </Link>
+                )}
               </div>
             </div>
 
@@ -196,6 +216,7 @@ const Navbar = () => {
 };
 
 const MobileMenu = ({ isOpen }) => {
+  const { user, handleSignOut } = useFirebase();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
   return (
@@ -262,9 +283,13 @@ const MobileMenu = ({ isOpen }) => {
       <Link to="/manage" className=" text-sm hover:font-semibold px-3 py-3">
         Manage Inventory
       </Link>
-      <Link to="/login" className="hover:font-semibold px-3 py-3">
-        Login/Signup
-      </Link>
+      {user?.email ? (
+        <UserMenu />
+      ) : (
+        <Link to="/login" className="hover:font-semibold px-3 py-3">
+          Login/Signup
+        </Link>
+      )}
     </div>
   );
 };
