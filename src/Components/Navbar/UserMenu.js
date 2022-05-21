@@ -8,6 +8,7 @@ import {
   Divider,
 } from '@mantine/core';
 import useFirebase from '../../hooks/useFireBase';
+import { Link } from 'react-router-dom';
 
 const UserButton = forwardRef(
   ({ image, name, email, icon, ...others }, ref) => (
@@ -60,8 +61,17 @@ const UserMenu = () => {
         }
       >
         <Menu.Label>User Menu</Menu.Label>
-        <Menu.Item>Messages</Menu.Item>
-        <Menu.Item>Gallery</Menu.Item>
+
+        <Menu.Item>
+          <Link to="/addItem" className=" text-sm hover:font-semibold">
+            Add Item
+          </Link>
+        </Menu.Item>
+        <Menu.Item>
+          <Link to="/user/items" className=" text-sm hover:font-semibold">
+            My Items
+          </Link>
+        </Menu.Item>
         <Divider />
         <Menu.Item onClick={() => handleSignOut()}>Signout</Menu.Item>
       </Menu>

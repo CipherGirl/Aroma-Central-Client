@@ -41,7 +41,7 @@ const AddItem = () => {
         'Content-type': 'application/json',
       },
 
-      body: JSON.stringify({ ...values }),
+      body: JSON.stringify({ ...values, userEmail: user.email }),
     })
       .then((res) => res.json())
       .then((data) => {
