@@ -1,20 +1,31 @@
-import { Button, Grid, Center, Card, Text } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
-import useFirebase from '../../hooks/useFireBase';
-import useItems from '../../hooks/useItems';
-import { ItemCard } from '../../Components/ItemCard/ItemCard';
+import { Button, Grid, Text, Center, Loader } from '@mantine/core';
 import { useModals } from '@mantine/modals';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { ItemCard } from '../../Components/ItemCard/ItemCard';
+import { auth } from '../../firebase.init';
+import useItems from '../../hooks/useItems';
 
 const UserItems = () => {
-  const { user } = useFirebase();
   const [items] = useItems();
   const [userItems, setUserItems] = useState([]);
   const modals = useModals();
+  const [user, loading, error] = useAuthState(auth);
 
   useEffect(() => {
-    setUserItems(items.filter((item) => item.userEmail === user.email));
-  }, []);
+    const url = `http://localhost:5000/user/items`;
+    fetch(url, {
+      headers: {
+        authorization: `${user.email} ${localStorage.getItem('accessToken')}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setUserItems(data));
+  }, [user.email]);
+
+  // useEffect(() => {
+  //   setUserItems(items.filter((item) => item.userEmail === user.email));
+  // }, []);
 
   const handleDeleteItem = (id) => {
     modals.openConfirmModal({
@@ -23,7 +34,8 @@ const UserItems = () => {
         <Text size="sm">
           This action is so important that you are required to confirm it with a
           modal. Please clicimport {useModals} from '@mantine/modals'; k one of
-          these buttons to proceed.
+          these buttons to pimport {useAuthState} from
+          'react-firebase-hooks/auth'; roceed.
         </Text>
       ),
       labels: { confirm: 'Confirm', cancel: 'Cancel' },
@@ -42,6 +54,14 @@ const UserItems = () => {
         });
     };
   };
+
+  if (!userItems) {
+    return (
+      <Center>
+        <Loader></Loader>
+      </Center>
+    );
+  }
 
   return (
     <div className=" flex flex-col items-center justify-center mx-0 px-0 md:mx-20 md:px-20">

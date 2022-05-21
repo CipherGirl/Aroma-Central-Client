@@ -42,13 +42,7 @@ const useFirebase = () => {
       createUserWithEmailAndPassword(auth, email, password)
         .then((result) => {
           //setUser(user);
-          updateNotification({
-            id: 'load-data',
-            color: 'green',
-            title: 'Successfully registered!',
-            message: 'Welcome, you are now member of Aroma Central!',
-            autoClose: 4000,
-          });
+
           updateUser(name);
         })
         .catch((error) => {
@@ -77,7 +71,23 @@ const useFirebase = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
-        navigate(from, { replace: true });
+
+        const url = 'http://localhost:5000/login';
+
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            email: user.email,
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            localStorage.setItem('accessToken', data.token);
+            navigate(from, { replace: true });
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -113,8 +123,33 @@ const useFirebase = () => {
   const updateUser = (displayName) => {
     updateProfile(auth.currentUser, { displayName: displayName })
       .then(() => {
+        updateNotification({
+          id: 'load-data',
+          color: 'green',
+          title: 'Successfully registered!',
+          message: 'Welcome, you are now member of Aroma Central!',
+          autoClose: 4000,
+        });
+
         setUser(auth.currentUser);
         console.log(user, auth.currentUser);
+
+        const url = 'http://localhost:5000/login';
+
+        fetch(url, {
+          method: 'POST',
+          body: JSON.stringify({
+            email: user.email,
+          }),
+          headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            localStorage.setItem('accessToken', data.token);
+            navigate(from, { replace: true });
+          });
       })
       .catch((err) => console.log(err));
   };
