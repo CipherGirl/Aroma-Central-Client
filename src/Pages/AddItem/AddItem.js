@@ -74,7 +74,7 @@ const AddItem = () => {
           />
           <TextInput
             label="Image URL"
-            placeholder="Suppliers name"
+            placeholder="URL of the Image"
             {...form.getInputProps('image')}
           />
           <NumberInput
@@ -84,7 +84,7 @@ const AddItem = () => {
           />
           <TextInput
             label="Supplier"
-            placeholder="URL of the image"
+            placeholder="Supplier name"
             {...form.getInputProps('supplierName')}
           />
           <NumberInput label="Quantity" {...form.getInputProps('quantity')} />
