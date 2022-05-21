@@ -26,7 +26,7 @@ const AddItem = () => {
   });
 
   const handleAddItem = (values) => {
-    form.reset();
+    //form.reset();
     showNotification({
       id: 'load-data',
       loading: true,
