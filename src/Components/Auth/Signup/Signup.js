@@ -18,6 +18,7 @@ const Signup = () => {
   const { signUpWithEmailAndPassword, signInUsingGoogle } = useFirebase();
   const form = useForm({
     initialValues: {
+      name: '',
       email: '',
       password: '',
       confirmPassword: '',
@@ -40,8 +41,8 @@ const Signup = () => {
     navigate('/login');
   };
   const handleSubmit = async (values) => {
-    const { email, password } = values;
-    await signUpWithEmailAndPassword(email, password);
+    const { name, email, password } = values;
+    await signUpWithEmailAndPassword(name, email, password);
   };
 
   return (
@@ -53,6 +54,12 @@ const Signup = () => {
           handleSubmit(values);
         })}
       >
+        <TextInput
+          required
+          label="Name"
+          placeholder="Enter your name"
+          {...form.getInputProps('name')}
+        />
         <TextInput
           required
           label="Email"

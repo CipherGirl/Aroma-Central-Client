@@ -29,7 +29,7 @@ const useFirebase = () => {
     });
   }, []);
 
-  const signUpWithEmailAndPassword = async (email, password) => {
+  const signUpWithEmailAndPassword = async (name, email, password) => {
     showNotification({
       id: 'load-data',
       loading: true,
@@ -41,7 +41,7 @@ const useFirebase = () => {
     try {
       createUserWithEmailAndPassword(auth, email, password)
         .then((result) => {
-          setUser(user);
+          //setUser(user);
           updateNotification({
             id: 'load-data',
             color: 'green',
@@ -49,7 +49,7 @@ const useFirebase = () => {
             message: 'Welcome, you are now member of Aroma Central!',
             autoClose: 4000,
           });
-          navigate(from, { replace: true });
+          updateUser(name);
         })
         .catch((error) => {
           if (error.message.includes('already-in-use')) {
@@ -62,12 +62,13 @@ const useFirebase = () => {
           }
         });
       await sendEmailVerification(auth.currentUser);
-      // updateUser(name);
     } catch (error) {
       showNotification({
         title: 'Cannot send verification mail',
         message: error.message,
       });
+    } finally {
+      navigate(from, { replace: true });
     }
   };
 
@@ -113,7 +114,7 @@ const useFirebase = () => {
     updateProfile(auth.currentUser, { displayName: displayName })
       .then(() => {
         setUser(auth.currentUser);
-        navigate('/');
+        console.log(user, auth.currentUser);
       })
       .catch((err) => console.log(err));
   };
