@@ -1,7 +1,9 @@
 import React from 'react';
 import { useMantineColorScheme, Button } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
+  const navigate = useNavigate();
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const dark = colorScheme === 'dark';
   return (
@@ -26,8 +28,13 @@ const Banner = () => {
           Are you a supplier of fragrance products? Come join us and become part
           of largest inventory of fine fragrance collection in Bangladesh
         </h1>
-        <Button variant="default" px={80} size="md">
-          Settings
+        <Button
+          variant="default"
+          px={80}
+          size="md"
+          onClick={() => navigate('/contact')}
+        >
+          Contact Us
         </Button>
       </div>
     </div>
