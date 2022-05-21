@@ -10,7 +10,7 @@ import Login from './Components/Auth/Login/Login';
 import Signup from './Components/Auth/Signup/Signup';
 import Home from './Pages/Home/Home';
 import Blog from './Pages/Blog/Blog';
-import About from './Pages/Home/About/About';
+import Contact from './Pages/Contact/Contact';
 import ViewItem from './Pages/ViewItem/ViewItem';
 import ManageItems from './Pages/ManageItems/ManageItems';
 import UserItems from './Pages/UserItems/UserItems';
@@ -40,7 +40,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/blog" element={<Blog />} />
-                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route

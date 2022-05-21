@@ -92,10 +92,10 @@ const Navbar = () => {
                 </Link>
 
                 <Link
-                  to="/about"
+                  to="/contact"
                   className="text-sm hover:font-semibold px-3 py-3"
                 >
-                  About
+                  Contact
                 </Link>
 
                 <Link
@@ -276,8 +276,8 @@ const MobileMenu = ({ isOpen }) => {
         Blog
       </Link>
 
-      <Link to="/about" className="text-sm hover:font-semibold px-3 py-3">
-        About
+      <Link to="/contact" className="text-sm hover:font-semibold px-3 py-3">
+        Contact
       </Link>
 
       <Link to="/manage" className=" text-sm hover:font-semibold px-3 py-3">
