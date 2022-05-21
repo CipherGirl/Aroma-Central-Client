@@ -1,4 +1,4 @@
-# Qaiba Homes
+# Aroma Central
 
 A inventory management system for Perfumes
 

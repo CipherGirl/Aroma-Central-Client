@@ -33,9 +33,7 @@ const UserItems = () => {
       children: (
         <Text size="sm">
           This action is so important that you are required to confirm it with a
-          modal. Please clicimport {useModals} from '@mantine/modals'; k one of
-          these buttons to pimport {useAuthState} from
-          'react-firebase-hooks/auth'; roceed.
+          modal. Please click one of these buttons to proceed.
         </Text>
       ),
       labels: { confirm: 'Confirm', cancel: 'Cancel' },
