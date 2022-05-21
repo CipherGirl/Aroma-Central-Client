@@ -13,7 +13,7 @@ const UserItems = () => {
   const [user, loading, error] = useAuthState(auth);
 
   useEffect(() => {
-    const url = `http://localhost:5000/user/items`;
+    const url = `https://polar-hamlet-16866.herokuapp.com/user/items`;
     fetch(url, {
       headers: {
         authorization: `${user.email} ${localStorage.getItem('accessToken')}`,
@@ -44,7 +44,7 @@ const UserItems = () => {
     });
 
     const deleteConfirm = () => {
-      fetch(`http://localhost:5000/delete/${id}`, {
+      fetch(`https://polar-hamlet-16866.herokuapp.com/delete/${id}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())

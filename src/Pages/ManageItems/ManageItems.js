@@ -47,7 +47,7 @@ const ManageItems = () => {
     });
 
     const deleteConfirm = () => {
-      fetch(`http://localhost:5000/delete/${id}`, {
+      fetch(`https://polar-hamlet-16866.herokuapp.com/delete/${id}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())

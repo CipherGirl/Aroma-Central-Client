@@ -4,7 +4,7 @@ const useItemDetail = (itemId) => {
   const [item, setItem] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/items/${itemId}`)
+    fetch(`https://polar-hamlet-16866.herokuapp.com/items/${itemId}`)
       .then((res) => res.json())
       .then((data) => setItem(data));
   }, []);

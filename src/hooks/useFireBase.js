@@ -72,7 +72,7 @@ const useFirebase = () => {
         const user = userCredential.user;
         setUser(user);
 
-        const url = 'http://localhost:5000/login';
+        const url = 'https://polar-hamlet-16866.herokuapp.com/login';
 
         fetch(url, {
           method: 'POST',
@@ -134,7 +134,7 @@ const useFirebase = () => {
         setUser(auth.currentUser);
         console.log(user, auth.currentUser);
 
-        const url = 'http://localhost:5000/login';
+        const url = 'https://polar-hamlet-16866.herokuapp.com/login';
 
         fetch(url, {
           method: 'POST',
