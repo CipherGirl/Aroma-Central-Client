@@ -16,6 +16,7 @@ import ManageItems from './Pages/ManageItems/ManageItems';
 import UserItems from './Pages/UserItems/UserItems';
 import AddItem from './Pages/AddItem/AddItem';
 import { ModalsProvider } from '@mantine/modals';
+import NotFound from './Pages/NotFound/NotFound';
 
 function App() {
   const [colorScheme, setColorScheme] = useState('light');
@@ -74,6 +75,7 @@ function App() {
                     </RequireAuth>
                   }
                 ></Route>
+                <Route path="*" element={<NotFound />}></Route>
               </Routes>
               {/* <div style={{ flexGrow: '1' }}></div> (Use a blank div with flex-grow:1 to fill unused spaced right before the footer) */}
               {/* <!-- Any content below this will always be at bottom. --> */}
