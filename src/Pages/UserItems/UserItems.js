@@ -5,12 +5,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { ItemCard } from '../../Components/ItemCard/ItemCard';
 import { auth } from '../../firebase.init';
 import useItems from '../../hooks/useItems';
+import { useNavigate } from 'react-router-dom';
 
 const UserItems = () => {
   const [items] = useItems();
   const [userItems, setUserItems] = useState([]);
   const modals = useModals();
   const [user, loading, error] = useAuthState(auth);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const url = `https://polar-hamlet-16866.herokuapp.com/user/items`;
@@ -92,7 +94,9 @@ const UserItems = () => {
         variant="gradient"
         gradient={{ from: 'black', to: 'grey' }}
         style={{ marginTop: 14, width: 350, margin: 30 }}
-        onClick={() => {}}
+        onClick={() => {
+          navigate('/');
+        }}
       >
         Manage Inventory
       </Button>
