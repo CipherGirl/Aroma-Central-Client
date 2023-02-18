@@ -44,7 +44,7 @@ const UserItems = () => {
     });
 
     const deleteConfirm = () => {
-      fetch(`https://polar-hamlet-16866.herokuapp.com/delete/${id}`, {
+      fetch(`${process.env.REACT_APP_BASEURL}/delete/${id}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())

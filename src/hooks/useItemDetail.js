@@ -4,7 +4,7 @@ const useItemDetail = (itemId) => {
   const [item, setItem] = useState({});
 
   useEffect(() => {
-    fetch(`https://polar-hamlet-16866.herokuapp.com/items/${itemId}`)
+    fetch(`${process.env.REACT_APP_BASEURL}/items/${itemId}`)
       .then((res) => res.json())
       .then((data) => setItem(data));
   }, []);

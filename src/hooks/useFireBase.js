@@ -72,7 +72,7 @@ const useFirebase = () => {
         const user = userCredential.user;
         setUser(user);
 
-        const url = 'https://polar-hamlet-16866.herokuapp.com/login';
+        const url = process.env.REACT_APP_BASEURL;
 
         fetch(url, {
           method: 'POST',
@@ -134,7 +134,7 @@ const useFirebase = () => {
         setUser(auth.currentUser);
         console.log(user, auth.currentUser);
 
-        const url = 'https://polar-hamlet-16866.herokuapp.com/login';
+        const url = `${process.env.REACT_APP_BASEURL + '/login'}`;
 
         fetch(url, {
           method: 'POST',

@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 const useItems = () => {
   const [items, setItems] = useState([]);
+  const url = process.env.REACT_APP_BASEURL;
 
   useEffect(() => {
-    fetch('https://polar-hamlet-16866.herokuapp.com/items')
+    fetch(`${url + '/items'}`)
       .then((res) => res.json())
       .then((data) => setItems(data));
   }, []);

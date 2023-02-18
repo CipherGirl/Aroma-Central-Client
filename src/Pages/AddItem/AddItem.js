@@ -35,7 +35,7 @@ const AddItem = () => {
       autoClose: false,
       disallowClose: true,
     });
-    fetch('https://polar-hamlet-16866.herokuapp.com/addItem', {
+    fetch(`${process.env.REACT_APP_BASEURL + '/addItem'}`, {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',

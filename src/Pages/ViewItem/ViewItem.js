@@ -13,16 +13,7 @@ const ViewItem = () => {
   const navigate = useNavigate();
 
   const handleDeliver = () => {
-    // axios
-    //   .put(`https://polar-hamlet-16866.herokuapp.com/update/${itemId}`, {
-    //     body: {
-    //       quantity: item.quantity - 1,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     setItem({ ...item, quantity: item.quantity - 1 });
-    //   });
-    fetch(`https://polar-hamlet-16866.herokuapp.com/update/${itemId}`, {
+    fetch(`${process.env.REACT_APP_BASEURL}/update/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -34,17 +25,7 @@ const ViewItem = () => {
   };
 
   const handleRestock = () => {
-    // axios
-    //   .put(`https://polar-hamlet-16866.herokuapp.com/deliver/${itemId}`, {
-    //     body: {
-    //       quantity: item.quantity + restock,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     setItem({ ...item, quantity: item.quantity + restock });
-    //     console.log(item);
-    //   });
-    fetch(`https://polar-hamlet-16866.herokuapp.com/update/${itemId}`, {
+    fetch(`${process.env.REACT_APP_BASEURL}/update/${itemId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
